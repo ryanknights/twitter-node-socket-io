@@ -2,7 +2,8 @@
 
 var express = require('express'),
 	app     = express(),
-	server  = app.listen(8080);
+	port    = process.env.PORT || 8080,
+	server  = app.listen(port);
 
 // var Twit = require('twit');
 
@@ -21,6 +22,6 @@ app.use(express.static(__dirname + '/public'));
 
 // app.use('/', require('./app/routes/default'));
 
-console.log('App listening on port 8080');
+console.log('App listening on port ' + port);
 
 exports = module.exports = app;
