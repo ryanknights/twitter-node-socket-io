@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tweets Map</title>
+
+	<style type="text/css">
+
+		div#map-canvas
+		{
+			height : 500px;
+			width  : 100%;
+		}
+
+		div#choose-search
+		{
+			margin-bottom : 20px;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="choose-search">
+		<p data-text-keyword>No Current Stream...</p>
+		<input type="text" data-input-keyword placeholder="Enter your streaming keyword" />
+		<button disabled data-submit-keyword type="submit">Stream</button>
+	</div>
+	<div id="map-canvas"></div>
+</body>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=visualization"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/js/socket.js"></script>
+
+</html>
