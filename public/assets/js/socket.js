@@ -1,6 +1,6 @@
 (function (window, document)
 {	
-	var socket = io.connect('http://localhost:8080'); // Create a new socket connection
+	var socket = io.connect(); // Create a new socket connection
 
 	var	map = new google.maps.Map(document.getElementById('map-canvas'), // Initialise the map
 	{
