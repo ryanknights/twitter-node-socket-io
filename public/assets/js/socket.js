@@ -1,6 +1,14 @@
 (function (window, document)
 {	
-	var socket = io.connect(); // Create a new socket connection
+	/**
+	* Create a new socket connection
+	**/	
+
+	var socket = io.connect();
+
+	/**
+	* Initialise map
+	**/	
 
 	var	map = new google.maps.Map(document.getElementById('map-canvas'), // Initialise the map
 	{
@@ -8,14 +16,16 @@
 		zoom: 3		
 	});
 
-	// Reference the DOM elements we will be using
+	/**
+	* Reference the DOM elements we will be using
+	**/	
 
 	var keywordInput  = document.querySelector('[data-input-keyword]'),
 		keywordSubmit = document.querySelector('[data-submit-keyword]'),
 		keywordText   = document.querySelector('[data-text-keyword]');
 
 	/**
-	* Setup event listeners on the socket which are passed FROM the server
+	* Setup event listeners for the socket which are passed FROM the server
 	**/
 	
 	socket.on('connected', function (currentKeyword) // Socket has successfuly connected
@@ -29,13 +39,19 @@
 	});
 
 	socket.on('twitter-stream', function (tweet) // Socket has recieved a new tweet
-	{
-		var tweetLocation = new google.maps.LatLng(tweet.lng,tweet.lat);
+	{	
+		/**
+		* Create new marker using the tweets location
+		**/
 
 		var marker = new google.maps.Marker(
 		{
-			position : tweetLocation,
+			position : new google.maps.LatLng(tweet.lng,tweet.lat)
 		});
+
+		/**
+		* Create info window using the tweets details
+		**/
 
 		var contentString = '<h4><a href="http://twitter.com/'+ tweet.name + '">' + tweet.name + '</a></h4>' +
 							'<p>' + tweet.text + '</p>';
@@ -45,10 +61,18 @@
 			content : contentString
 		});
 
+		/**
+		* Setup click event to display info window on marker click
+		**/
+
 		google.maps.event.addListener(marker, 'click', function ()
 		{
 			infowindow.open(map, marker);
 		});
+
+		/**
+		* Add new marker to the map
+		**/
 
 		marker.setMap(map);
 	});
@@ -60,7 +84,7 @@
 	});		
 
 	/**
-	* Setup event listeners that will pass data TO the server
+	* Setup event listeners that will pass data FROM the socket TO the server
 	**/
 
 	keywordSubmit.addEventListener('click', function (e) // On click of the submit button
@@ -70,5 +94,4 @@
 		
 	}, false);	
 
-		
 }(window, document));

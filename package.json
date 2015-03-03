@@ -9,12 +9,5 @@
 		"method-override" 	: "~2.0.2",
 		"socket.io"         : "*",
 		"twit"              : "*"
-	},
-  "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-contrib-jshint": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-watch": "latest"
-  }	
+	}
 }
